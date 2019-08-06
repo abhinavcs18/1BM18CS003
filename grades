@@ -1,0 +1,52 @@
+#include<stdio.h>
+#include<conio.h>
+int grade(int x)
+{
+int c;
+if(x>=90 && x<=100)
+{
+c=10;
+}
+else if(x>=80 && x<=90)
+{
+c=9;
+}
+else if(x>=70 && x<=80)
+{
+c=8;
+}
+else if(x>=60 && x<=70)
+{
+c=7;
+}
+else if(x>=50 && x<=60)
+{
+c=6;
+}
+else if(x>=40 && x<=50)
+{
+c=5;
+}
+else
+{
+c=0;
+}
+return c;
+}
+void main()
+{
+float sgpa;
+int c1=5,c2=4,c3=4,c4=3,c5=4;
+int m1,m2,m3,m4,m5;
+int g1,g2,g3,g4,g5;
+printf("enter the marks in all the five subjects\n");
+scanf("%d%d%d%d%d",&m1,&m2,&m3,&m4,&m5);
+g1=grade(m1);
+g2=grade(m2);
+g3=grade(m3);
+g4=grade(m4);
+g5=grade(m5);
+sgpa=(float)((g1*c1+g2*c2+g3*c3+g4*c4+g5*c5))/20;
+printf("SGPA = %f",sgpa);
+getch();
+}
