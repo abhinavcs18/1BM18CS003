@@ -11,7 +11,7 @@ void push( char s[100], int *t, char c)
 		*t=*t+1;
 		s[*t] = c;
 	}
-char pop( char [100], int *t
+char pop( char [100], int *t)
 {
 	if(*t == -1)
 	{
@@ -33,16 +33,43 @@ int pre(char c)
 	else
 	return 0;
 }
-void main()
+int main()
 {
-char s[100],st[100];
-int top = -1,n;
-printf("enter the length of infix expression");
-scanf("%d",&n);
-for(int i=0;i<n+1;i++)
-{
-	scanf("%c",&st[i]);
-	if(st[i]=='A')
+	char stack[100],infix[100];
+	char e;
+	int top=-1;
+	printf("Enter the infix expression");
+        scanf("%s",infix);
+	infix[strlen(infix)]='\0';
+	int i=0;
+	int j;
+	while(infix[i]!='\0')
 	{
-		printf("%c",st[i]);
+		if((infix[i]>='A'&&infix[i]<='Z')||(infix[i]>='a'&&infix[i]<='z'))
+			printf("%c",infix[i]);
+		else if(infix[i]=='(')
+			push(infix[i],stack,&top);
+		else if(infix[i]==')')
+		{
+			while((e=pop(stack,&top))!='(')
+				printf("%c",e);
+		}
+		else
+		{
+			if(pre(stack[top])>=pre(infix[i]))
+				push(infix[i],stack,&top);
+			else
+			{
+				while(pre(stack[top])>=pre(infix[i]))
+					e=pop(stack,&top);
+				push(infix[i],stack,&top);
+			}
+		}
+		i++;
 	}
+	while(top!=-1)
+	{
+		printf("%c",pop(stack,&top));
+	}
+	return 0;
+}
