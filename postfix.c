@@ -1,8 +1,8 @@
-#include<stfdio.h>
+#include<stdio.h>
 #include<string.h>
 #include<stdlib.h>
 #include<ctype.h>
-void push( char s[100], int *t, char c)
+void push( char c,char s[100],int *t)
 {
 	if(*t==99)
 		printf("stack overflow");
@@ -11,15 +11,17 @@ void push( char s[100], int *t, char c)
 		*t=*t+1;
 		s[*t] = c;
 	}
-char pop( char [100], int *t)
+}
+char pop( char s[100], int *t)
 {
 	if(*t == -1)
 	{
 		printf("stack underflow");
+		exit(0);
 	}
 	else
 	{
-		return s[*t--];
+		return s[(*t)--];
 	}
 }
 int pre(char c)
@@ -40,7 +42,7 @@ int main()
 	int top=-1;
 	printf("Enter the infix expression");
         scanf("%s",infix);
-	infix[strlen(infix)]='\0';
+
 	int i=0;
 	int j;
 	while(infix[i]!='\0')
@@ -56,20 +58,19 @@ int main()
 		}
 		else
 		{
-			if(pre(stack[top])>=pre(infix[i]))
-				push(infix[i],stack,&top);
-			else
-			{
-				while(pre(stack[top])>=pre(infix[i]))
-					e=pop(stack,&top);
-				push(infix[i],stack,&top);
-			}
+			while(pre(stack[top])>=pre(infix[i]))
+			printf("%c",pop(stack,&top));
+			push(infix[i],stack,&top);
+		
+			
 		}
 		i++;
 	}
+
 	while(top!=-1)
 	{
 		printf("%c",pop(stack,&top));
+
 	}
 	return 0;
 }
